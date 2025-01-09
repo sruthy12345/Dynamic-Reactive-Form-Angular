@@ -1,0 +1,11 @@
+{
+  "forms": [
+    {
+      "id": "bfc4",
+      "firstName": "test",
+      "lastName": "abc",
+      "profCheck": true,
+      "citizenType": "indian"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+<div class="container mt-5" [formGroup]="dynamicForm">
+  <h1>Dynamic Reactive Form</h1>
+  <div *ngFor="let control of jsonData">
+    <div class="form-group">
+      <div *ngIf="control.type === 'text'">
+        <div>
+          {{ control.label }}
+        </div>
+
+        <!-- Handle Input Type Dynamically -->
+        <input
+          [type]="control.type"
+          [formControlName]="control.name"
+          [value]="control.value"
+          class="form-control"
+          [placeholder]="control.label"
+        />
+      </div>
+
+      <!-- Handle Checkbox -->
+      <div *ngIf="control.type === 'checkbox'" class="form-check">
+        <input
+          type="checkbox"
+          [formControlName]="control.name"
+          [name]="control.name"
+          class="form-check-input"
+          [value]="control.value"
+        />
+        <label class="form-check-label">{{ control.label }}</label>
+      </div>
+
+      <!-- Handle Radio Buttons -->
+      <div *ngIf="control.type === 'radio'" class="form-check">
+        <label class="form-check-label">{{ control.label }}</label>
+
+        <div *ngFor="let option of control.options">
+          <input
+            type="radio"
+            [formControlName]="control.name"
+            [value]="option.value"
+            class="form-check-input"
+            [id]="option.value"
+            [name]="control.name"
+          />
+          <label class="form-check-label" [for]="option.value">
+            {{ option.label }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Validation Error Message -->
+      <div
+        *ngIf="
+          dynamicForm.get(control.name)?.invalid &&
+          dynamicForm.get(control.name)?.touched
+        "
+        class="text-danger"
+      >
+        <small *ngIf="dynamicForm.get(control.name)?.hasError('required')">
+          {{ control.label }} is required.
+        </small>
+        <small *ngIf="dynamicForm.get(control.name)?.hasError('minlength')">
+          {{ control.label }} should have at least
+          {{ control.validators.minLength }} characters.
+        </small>
+        <small *ngIf="dynamicForm.get(control.name)?.hasError('maxlength')">
+          {{ control.label }} can only have maximum of
+          {{ control.validators.maxLength }} characters.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Form -->
+  <div class="form-group mt-3">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="submitForm()"
+      [disabled]="dynamicForm.invalid"
+    >
+      Submit
+    </button>
+  </div>
+
+  <!-- Reset Form -->
+  <div class="form-group mt-3">
+    <button type="submit" class="btn btn-primary" (click)="resetForm()">
+      Reset
+    </button>
+  </div>
+</div>
