@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../common.service';

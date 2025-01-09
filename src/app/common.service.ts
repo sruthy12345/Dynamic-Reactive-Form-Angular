@@ -49,6 +49,7 @@ export class CommonService {
       
 
 ]
+/* success popup */
 successPopup(title: string | HTMLElement) {
   return Swal.fire({
     title,
@@ -58,7 +59,7 @@ successPopup(title: string | HTMLElement) {
     },
   });
 }
-
+/* error popup */
 errorPopup(title: string | HTMLElement, text = '') {
   return Swal.fire({
     title,
